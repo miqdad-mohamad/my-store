@@ -1,0 +1,113 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}Home - My Store{% endblock %}
+
+{% block content %}
+
+<!-- 1. القسم الترحيبي (Hero) -->
+<div class="hero">
+    <h1>Welcome to My Store</h1>
+    <p>Your one-stop shop for the best products!</p>
+    <a href="products.html" class="hero-btn">Shop Now</a>
+</div>
+
+<!-- 2. قسم التصنيفات -->
+<section class="categories">
+    <h2>Our Categories</h2>
+    <div class="category-list">
+        <div class="category-item"><a href="products.html?category=mobile">Mobile</a></div>
+        <div class="category-item"><a href="products.html?category=batterries">Batterries</a></div>
+        <div class="category-item"><a href="products.html?category=tablets">Tablets</a></div>
+        <div class="category-item"><a href="products.html?category=accessories">Accessories</a></div>
+        <div class="category-item"><a href="products.html?category=cameras">Cameras</a></div>
+        <div class="category-item"><a href="products.html?category=monitors">Monitors</a></div>
+    </div>
+</section>
+
+<!-- 3. قسم المنتجات -->
+<section class="featured-products">
+    <h2>Most sold</h2>
+    <div class="product-grid">
+
+        <div class="product-card">
+            <img src="{% static 'store/images/product-example.webp' %}" alt="product 1">
+            <h3>product 1 name</h3>
+            <p class="price">xx$</p>
+            <button class="add-to-cart">Add to cart</button>
+        </div>
+
+        <div class="product-card">
+            <img src="{% static 'store/images/product-example.webp' %}" alt="product 2">
+            <h3>product 2 name</h3>
+            <p class="price">xx$</p>
+            <button class="add-to-cart">Add to cart</button>
+        </div>
+
+        <div class="product-card">
+            <img src="{% static 'store/images/product-example.webp' %}" alt="product 3">
+            <h3>product 3 name</h3>
+            <p class="price">xx$</p>
+            <button class="add-to-cart">Add to cart</button>
+        </div>
+
+        <div class="product-card">
+            <img src="{% static 'store/images/product-example.webp' %}" alt="product 4">
+            <h3>product 4 name</h3>
+            <p class="price">xx$</p>
+            <button class="add-to-cart">Add to cart</button>
+        </div>
+
+        <div class="product-card">
+            <img src="{% static 'store/images/product-example.webp' %}" alt="product 5">
+            <h3>product 5 name</h3>
+            <p class="price">xx$</p>
+            <button class="add-to-cart">Add to cart</button>
+        </div>
+
+        <div class="product-card">
+            <img src="{% static 'store/images/product-example.webp' %}" alt="product 6">
+            <h3>product 6 name</h3>
+            <p class="price">xx$</p>
+            <button class="add-to-cart">Add to cart</button>
+        </div>
+
+        <div class="product-card">
+            <img src="{% static 'store/images/product-example.webp' %}" alt="product 7">
+            <h3>product 7 name</h3>
+            <p class="price">xx$</p>
+            <button class="add-to-cart">Add to cart</button>
+        </div>
+
+        <div class="product-card">
+            <img src="{% static 'store/images/product-example.webp' %}" alt="product 8">
+            <h3>product 8 name</h3>
+            <p class="price">xx$</p>
+            <button class="add-to-cart">Add to cart</button>
+        </div>
+
+        <div class="product-card">
+            <img src="{% static 'store/images/product-example.webp' %}" alt="product 9">
+            <h3>product 9 name</h3>
+            <p class="price">xx$</p>
+            <button class="add-to-cart">Add to cart</button>
+        </div>
+
+        <div class="product-card">
+            <img src="{% static 'store/images/product-example.webp' %}" alt="product 10">
+            <h3>product 10 name</h3>
+            <p class="price">xx$</p>
+            <button class="add-to-cart">Add to cart</button>
+        </div>
+
+        <div class="product-card">
+            <img src="{% static 'store/images/product-example.webp' %}" alt="product 11">
+            <h3>product 11 name</h3>
+            <p class="price">xx$</p>
+            <button class="add-to-cart">Add to cart</button>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

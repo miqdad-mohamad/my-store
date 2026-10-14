@@ -1,0 +1,49 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="{% static 'store/style.css' %}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}My Store{% endblock %}</title>
+</head>
+
+<body>
+    <header>
+        <nav class="top-nav" aria-label="Main Navigation">
+            <ul class="nav-links">
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'products' %}">Products</a></li>
+                <li><a href="{% url 'cart' %}">Cart</a></li>
+                <li><a href="{% url 'orders' %}">Orders</a></li>
+                <li><a href="#aboutus">About US</a></li>
+            </ul>
+            <ul class="nav-links">
+                <li><a href="{% url 'login' %}" class="login">Login</a></li>
+                <li><a href="{% url 'register' %}" class="register">Register</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    {% block content %}
+    {% endblock %}
+
+
+    <footer>
+        <div class="footer-content" id="aboutus">
+            <h2>Contact Us via:</h2>
+            <p>Phone: <a href="tel:+963123456789">+963 123 456 789</a></p>
+            <p>Email: <a href="mailto:store@sells.com">store@sells.com</a></p>
+            <p>Facebook: <a href="url">facebook-page</a></p>
+            <p>Instagram: <a href="url">istagram-page</a></p>
+        </div>
+        <hr>
+        <p class="copyright">&copy; 2026 All Rights Reserved</p>
+    </footer>
+
+    <script src="{% static 'store/script.js' %}"></script>
+</body>
+
+</html>

@@ -1,8 +1,17 @@
-/* 1. تصفير الهوامش الافتراضية (أساس أي موقع) */
+/* =========================================
+   1. تصفير الهوامش الافتراضية (Reset)
+   ========================================= */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    overflow-x: hidden;
+    /* يمنع السكرول الأفقي */
 }
 
 body {
@@ -12,6 +21,9 @@ body {
     line-height: 1.6;
 }
 
+/* =========================================
+   2. شريط التنقل (Navbar)
+   ========================================= */
 .top-nav {
     display: flex;
     justify-content: space-between;
@@ -19,9 +31,9 @@ body {
     background-color: #2c3e50;
     padding: 15px 40px;
     position: sticky;
-    /* يثبت الشريط فوق لما تنزل بالصفحة*/
     top: 0;
     z-index: 1000;
+    width: 100%;
 }
 
 .nav-links {
@@ -41,157 +53,30 @@ body {
     color: #e67e22;
 }
 
-/* القسم الترحيبي (Hero) */
-.hero {
+/* =========================================
+   3. تنسيق العناوين الموحد (Page Title)
+   ========================================= */
+.page-title {
     text-align: center;
-    padding: 100px 20px;
-    background: linear-gradient(135deg, #3498db, #2980b9);
-    color: white;
-}
-
-.hero h1 {
-    font-size: 3rem;
-    margin-bottom: 15px;
-}
-
-.hero p {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-}
-
-.hero-btn {
-    display: inline-block;
-    background-color: #e67e22;
-    color: white;
-    padding: 12px 35px;
-    text-decoration: none;
-    border-radius: 8px;
-    font-size: 1.1rem;
+    padding: 30px 20px 20px;
+    font-size: 1.8rem;
+    /* حجم موحد و متناسق */
     font-weight: bold;
-    transition: background-color 0.5s, transform 0.3s;
-}
-
-.hero-btn:hover {
-    background-color: #d35400;
-    transform: scale(1.05);
-}
-
-/* المسافات بين الأقسام داخل الـ main */
-main {
-    padding: 40px 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    /* يوسط المحتوى بالصفحة */
-}
-
-section {
-    margin-bottom: 100px;
-    /* مسافة كبيرة بين كل قسم والتاني */
-}
-
-section h2 {
-    text-align: center;
-    font-size: 2rem;
     color: #2c3e50;
-    margin-bottom: 30px;
+    /* اللون الافتراضي (للخلفيات الفاتحة) */
+    margin: 0;
 }
 
-/* تنسيق التصنيفات (Categories) */
-.category-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-}
-
-.category-item {
-    background-color: white;
-    padding: 15px 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s;
-}
-
-.category-item:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    transform: translateY(-3px);
-}
-
-.category-item a {
-    text-decoration: none;
-    color: #2c3e50;
-    font-weight: bold;
-    font-size: 1.1rem;
-}
-
-/* تنسيق المنتجات (Products) */
-.product-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-}
-
-.product-card {
-    background-color: white;
-    border-radius: 12px;
-    padding: 20px;
-    width: 240px;
-    text-align: center;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s;
-}
-
-.product-card:hover {
-    transform: translateY(-5px);
-}
-
-.product-card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    /* يضبط حجم الصورة بدون ما تشوه */
-    border-radius: 8px;
-    margin-bottom: 15px;
-    background-color: #eee;
-    /* لون خلفية مؤقت لحد ما تحط صور حقيقية */
-}
-
-.product-card h3 {
-    font-size: 1.1rem;
-    margin-bottom: 10px;
-    color: #2c3e50;
-}
-
-.price {
-    color: #e74c3c;
-    font-size: 1.3rem;
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-.add-to-cart {
-    background-color: #27ae60;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-    width: 100%;
-    transition: background-color 0.3s;
-}
-
-.add-to-cart:hover {
-    background-color: #219150;
-}
-
-/*تنسيق الفوتر (Footer) */
+/* =========================================
+   4. الفوتر (Footer)
+   ========================================= */
 footer {
     background-color: #2c3e50;
     color: #ecf0f1;
     text-align: center;
     padding: 50px 20px 20px;
+    margin-top: 50px;
+    width: 100%;
 }
 
 .footer-content h2 {
@@ -226,7 +111,173 @@ footer hr {
     color: #bdc3c7;
 }
 
-/* 1. توزيع الصفحة (Sidebar + Products) */
+/* =========================================
+   5. الصفحة الرئيسية (Home)
+   ========================================= */
+.hero {
+    width: 100%;
+    text-align: center;
+    padding: 100px 20px;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.hero-btn {
+    display: inline-block;
+    background-color: #e67e22;
+    color: white;
+    padding: 12px 35px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.hero-btn:hover {
+    background-color: #d35400;
+    transform: scale(1.05);
+}
+
+.categories,
+.featured-products {
+    max-width: 1200px;
+    margin: 0 auto 70px;
+    padding: 0 20px;
+}
+
+section h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+
+.category-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.category-item {
+    background-color: white;
+    padding: 15px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s;
+}
+
+.category-item:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
+}
+
+.category-item a {
+    text-decoration: none;
+    color: #2c3e50;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.product-card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 20px;
+    width: 240px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    background-color: #eee;
+}
+
+.product-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.price {
+    color: #e74c3c;
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.add-to-cart {
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.add-to-cart:hover {
+    background-color: #219150;
+}
+
+/* =========================================
+   6. الصفحات الداخلية (Wrappers)
+   ========================================= */
+/* تنسيق موحد لكل الصفحات الداخلية (منتجات، سلة، طلبات، دفع، دخول) */
+.products-page,
+.cart-page,
+.orders-page,
+.checkout-page,
+.auth-page {
+    width: 100%;
+    min-height: 80vh;
+    background-color: #2c3e50;
+    /* الخلفية الغامقة الموحدة */
+    padding: 20px 20px 60px;
+}
+
+/* تغيير لون العنوان للأبيض في الصفحات الغامقة */
+.products-page .page-title,
+.cart-page .page-title,
+.orders-page .page-title,
+.checkout-page .page-title,
+.auth-page .page-title {
+    color: white;
+}
+
+/* =========================================
+   7. صفحة المنتجات (Products Page)
+   ========================================= */
 .products-layout {
     display: flex;
     gap: 30px;
@@ -236,7 +287,6 @@ footer hr {
     align-items: flex-start;
 }
 
-/* 2. تنسيق الشريط الجانبي (Sidebar) */
 .sidebar {
     width: 250px;
     background-color: white;
@@ -246,11 +296,9 @@ footer hr {
     flex-shrink: 0;
 }
 
-/* 3. تنسيق عنوان Categories */
 .toggle-title {
     display: flex;
     justify-content: space-between;
-    /* السهم على اليمين */
     align-items: center;
     cursor: pointer;
     user-select: none;
@@ -271,15 +319,12 @@ footer hr {
     transition: transform 0.3s ease;
 }
 
-/*  تنسيق قائمة الفلترة (Filter List) */
 .filter-list {
     list-style: none;
-    /* شيل النقاط */
     padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
-    /* خليهم تحت بعض (عمودي) */
     gap: 8px;
 }
 
@@ -294,171 +339,36 @@ footer hr {
 
 .filter-list a:hover {
     background-color: #f0f8ff;
-    /* خلفية زرقاء فاتحة عند المرور */
     color: #3498db;
     padding-left: 18px;
-    /* حركة بسيطة عند المرور */
 }
 
-/*كلاس الإخفاء (يستخدمه الـ JS) */
 .hidden {
     display: none !important;
 }
 
-/*دوران السهم لما نضغط */
 .toggle-title.active .arrow {
     transform: rotate(180deg);
 }
 
-/*المنتجات تاخد باقي المساحة */
 .products-main {
     flex: 1;
 }
 
-/* 1. الحاوية الرئيسية لصفحة الدخول */
-.auth-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 75vh;
-    width: 100%;
-    /* عشان الفورم يكون بالمنتصف بين الهيدر والفوتر */
-    background-color: #2c3e50;
-    padding: 40px 20px;
-    max-width: none;
-}
-
-/* 2. صندوق الفورم */
-.auth-container {
-    background-color: white;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 800px;
-
-    /* عرض الفورم ثابت ومناسب */
-}
-
-.auth-container h2 {
-    text-align: center;
-    color: #2c3e50;
-    margin-bottom: 30px;
-}
-
-/* 3. تنسيق حقول الإدخال */
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    color: #555;
-    font-weight: bold;
-    font-size: 0.95rem;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 1rem;
-    transition: border-color 0.3s;
-}
-
-/* تأثير عند الضغط على الحقل */
-.form-group input:focus {
-    border-color: #3498db;
-    outline: none;
-    box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
-}
-
-/* 4. خيارات إضافية (تذكرني ونسيان كلمة المرور) */
-.form-options {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
-    font-size: 0.9rem;
-    color: #555;
-}
-
-.form-options a {
-    color: #3498db;
-    text-decoration: none;
-}
-
-.form-options a:hover {
-    text-decoration: underline;
-}
-
-/* 5. زر الدخول */
-.auth-btn {
-    width: 100%;
-    padding: 12px;
-    background-color: #27ae60;
-    /* لون أخضر */
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.auth-btn:hover {
-    background-color: #219150;
-}
-
-/* 6. رابط التسجيل */
-.auth-switch {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 0.95rem;
-    color: #555;
-}
-
-.auth-switch a {
-    color: #e67e22;
-    /* لون برتقالي */
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.auth-switch a:hover {
-    text-decoration: underline;
-}
-
-/* 1. صفحة السلة */
-.cart-page {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    min-height: 60vh;
-}
-
-.page-title {
-    text-align: center;
-    font-size: 2.2rem;
-    color: #2c3e50;
-    margin-bottom: 30px;
-}
-
-/* 2. توزيع الصفحة: الجدول + الملخص */
+/* =========================================
+   8. صفحة السلة (Cart Page)
+   ========================================= */
 .cart-container {
     display: flex;
     gap: 30px;
     align-items: flex-start;
     flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-/* 3. الجدول */
 .cart-table {
     flex: 2;
-    /* ياخد مساحة أكبر */
     width: 100%;
     border-collapse: collapse;
     background-color: white;
@@ -468,7 +378,7 @@ footer hr {
 }
 
 .cart-table thead {
-    background-color: #2c3e50;
+    background-color: #3498db;
     color: white;
 }
 
@@ -493,7 +403,6 @@ footer hr {
     border-radius: 8px;
 }
 
-/* 4. حقل الكمية */
 .qty-input {
     width: 60px;
     padding: 8px;
@@ -503,7 +412,6 @@ footer hr {
     font-size: 1rem;
 }
 
-/* 5. زر الحذف */
 .remove-btn {
     background-color: #e74c3c;
     color: white;
@@ -519,10 +427,8 @@ footer hr {
     background-color: #c0392b;
 }
 
-/* 6. ملخص الطلب */
 .cart-summary {
     flex: 1;
-    /* ياخد مساحة أقل */
     background-color: white;
     padding: 25px;
     border-radius: 10px;
@@ -570,29 +476,125 @@ footer hr {
     background-color: #219150;
 }
 
-/* 1. صفحة الدفع */
-.checkout-page {
-    max-width: 1200px;
+/* =========================================
+   9. صفحة الطلبات (Orders Page)
+   ========================================= */
+.orders-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 1000px;
     margin: 0 auto;
-    padding: 40px 20px;
-    min-height: 60vh;
 }
 
-/* 2. توزيع الصفحة: الفورم + الملخص */
+.order-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.order-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.order-header h3 {
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.order-date {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+.status-badge {
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.status-badge.delivered {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-badge.pending {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.status-badge.shipped {
+    background-color: #cce5ff;
+    color: #004085;
+}
+
+.order-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    color: #555;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.order-total {
+    font-weight: bold;
+    color: #e74c3c;
+    font-size: 1.1rem;
+}
+
+.order-footer {
+    text-align: right;
+}
+
+.view-details-btn {
+    display: inline-block;
+    padding: 8px 20px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    transition: background-color 0.3s;
+}
+
+.view-details-btn:hover {
+    background-color: #2980b9;
+}
+
+/* =========================================
+   10. صفحة الدفع (Checkout Page)
+   ========================================= */
 .checkout-container {
     display: flex;
     gap: 30px;
     align-items: flex-start;
     flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-/* 3. الفورم */
 .checkout-form {
     flex: 2;
     background-color: white;
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 .checkout-form h2 {
@@ -663,13 +665,12 @@ footer hr {
     background-color: #219150;
 }
 
-/* 4. ملخص الطلب */
 .order-summary {
     flex: 1;
     background-color: white;
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     min-width: 280px;
 }
 
@@ -704,112 +705,106 @@ footer hr {
     padding-top: 15px;
     margin-top: 20px;
 }
-/* 1. صفحة الطلبات */
-.orders-page {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    min-height: 60vh;
-}
 
-/* 2. حاوية الطلبات (عمودية) */
-.orders-container {
+/* =========================================
+   11. صفحة الدخول والتسجيل (Auth Pages)
+   ========================================= */
+.auth-page {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
 }
 
-/* 3. بطاقة الطلب الواحد */
-.order-card {
-    background-color: white;
-    border-radius: 10px;
-    padding: 25px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s, box-shadow 0.3s;
+.auth-container {
+    background-color: #1a1a1a;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 400px;
 }
 
-.order-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+.auth-container h2 {
+    text-align: center;
+    color: white;
+    margin-bottom: 30px;
 }
 
-/* 4. رأس البطاقة (رقم الطلب والتاريخ والحالة) */
-.order-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    border-bottom: 1px solid #f0f0f0;
-    padding-bottom: 15px;
-    margin-bottom: 15px;
+.form-group {
+    margin-bottom: 20px;
 }
 
-.order-header h3 {
-    color: #2c3e50;
-    margin-bottom: 5px;
-}
-
-.order-date {
-    color: #7f8c8d;
-    font-size: 0.9rem;
-}
-
-/* 5. شارة الحالة (Status Badge) */
-.status-badge {
-    padding: 6px 15px;
-    border-radius: 20px;
-    font-size: 0.85rem;
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #bdc3c7;
     font-weight: bold;
-    text-transform: uppercase;
+    font-size: 0.95rem;
 }
 
-.status-badge.delivered {
-    background-color: #d4edda;
-    color: #155724;
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #2c3e50;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #2c3e50;
+    color: white;
+    transition: border-color 0.3s;
 }
 
-.status-badge.pending {
-    background-color: #fff3cd;
-    color: #856404;
+.form-group input::placeholder {
+    color: #95a5a6;
 }
 
-.status-badge.shipped {
-    background-color: #cce5ff;
-    color: #004085;
+.form-group input:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
 }
 
-/* 6. جسم البطاقة (المنتجات والمجموع) */
-.order-body {
+.form-options {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
-    color: #555;
-    flex-wrap: wrap;
-    gap: 10px;
+    margin-bottom: 25px;
+    font-size: 0.9rem;
+    color: #bdc3c7;
+    flex-wrap: nowrap;
 }
 
-.order-total {
-    font-weight: bold;
-    color: #e74c3c;
-    font-size: 1.1rem;
-}
-
-/* 7. ذيل البطاقة (زر التفاصيل) */
-.order-footer {
-    text-align: right;
-}
-
-.view-details-btn {
-    display: inline-block;
-    padding: 8px 20px;
-    background-color: #3498db;
-    color: white;
+.form-options a {
+    color: #3498db;
     text-decoration: none;
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #27ae60;
+    color: white;
+    border: none;
     border-radius: 6px;
-    font-size: 0.95rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
     transition: background-color 0.3s;
 }
 
-.view-details-btn:hover {
-    background-color: #2980b9;
+.auth-btn:hover {
+    background-color: #219150;
+}
+
+.auth-switch {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.95rem;
+    color: #bdc3c7;
+}
+
+.auth-switch a {
+    color: #e67e22;
+    font-weight: bold;
+    text-decoration: none;
 }
