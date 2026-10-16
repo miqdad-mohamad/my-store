@@ -7,29 +7,39 @@
     <div class="auth-container">
         <h2>Create an Account</h2>
 
-        <!-- action="#" يعني مؤقتاً، لما نبلش Django رح نحط رابط الـ View -->
-        <form action="#" method="POST" class="auth-form">
+        <form action="" method="POST" class="auth-form">
+            {% csrf_token %}
 
             <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <label for="{{ form.username.id_for_label }}">Username</label>
+                {{ form.username }}
             </div>
 
             <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                <label for="{{ form.password1.id_for_label }}">Password</label>
+                {{ form.password1 }}
             </div>
+
             <div class="form-group">
-                <label for="password">Confirm your password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password again" required>
+                <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
+                {{ form.password2 }}
             </div>
 
             <div class="form-options">
-                <label>
-                    <input type="checkbox" name="remember"> Remember me
-                </label>
-                <a href="{% url 'login' %}">Alrady have an account? login</a>
+                <a href="{% url 'login' %}">Already have an account? Login</a>
             </div>
+            {% if form.errors %}
+            <div style="color: red; background-color: #ffe6e6; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
+                {% for field in form %}
+                {% for error in field.errors %}
+                <p>{{ error }}</p>
+                {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
 
             <button type="submit" class="auth-btn">Register</button>
         </form>

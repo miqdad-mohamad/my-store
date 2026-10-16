@@ -4,71 +4,55 @@
 
 {% block content %}
 <div class="products-page">
-    <h1 class="page-title">All Products</h1>
+    <h1 class="page-title">
+        {% if search_query %}
+        Search Results for "{{ search_query }}"
+        {% else %}
+        All Products
+        {% endif %}
+    </h1>
 
     <div class="products-layout">
         <!-- الشريط الجانبي للفلترة -->
         <aside class="sidebar">
-            <!-- ضفنا id و class و سهم صغير -->
             <h3 id="categories-toggle" class="toggle-title">Categories <span class="arrow">▼</span></h3>
-
-            <!-- ضفنا id للقائمة -->
             <ul class="filter-list hidden" id="categories-list">
-                <li><a href="products.html">All Products</a></li>
-                <li><a href="products.html?category=mobile">Mobiles</a></li>
-                <li><a href="products.html?category=batterries">Batteries</a></li>
-                <li><a href="products.html?category=tablets">Tablets</a></li>
-                <li><a href="products.html?category=accessories">Accessories</a></li>
-                <li><a href="products.html?category=cameras">Cameras</a></li>
-                <li><a href="products.html?category=monitors">Monitors</a></li>
+                <li><a href="{% url 'products' %}">All Products</a></li>
+                {% for category in categories %}
+                <li><a href="{% url 'products' %}?category={{ category.slug }}">{{ category.name }}</a></li>
+                {% endfor %}
             </ul>
         </aside>
 
         <!-- شبكة المنتجات -->
         <section class="products-main">
             <div class="product-grid">
-                <!-- المنتج 1 -->
+                {% for product in products %}
                 <div class="product-card">
-                    <img src="https://picsum.photos/800/800?random=1" alt="Product 1">
-                    <h3>Mobile Phone X</h3>
-                    <p class="price">$500</p>
-                    <button class="add-to-cart">Add to cart</button>
+                    <a href="{% url 'product_detail' product.id %}">
+                        {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                        {% else %}
+                        <img src="https://picsum.photos/800/800?random={{ product.id }}" alt="{{ product.name }}">
+                        {% endif %}
+                        <h3>{{ product.name }}</h3>
+                    </a>
+                    <p class="price">${{ product.price }}</p>
+                    <form action="{% url 'add_to_cart' product.id %}" method="post"
+                        style="width: 100%; margin-top: auto;">
+                        {% csrf_token %}
+                        <button type="submit" class="add-to-cart">Add to cart</button>
+                    </form>
                 </div>
-                <!-- المنتج 2 -->
-                <div class="product-card">
-                    <img src="https://picsum.photos/800/800?random=2" alt="Product 2">
-                    <h3>Wireless Battery</h3>
-                    <p class="price">$25</p>
-                    <button class="add-to-cart">Add to cart</button>
-                </div>
-                <!-- المنتج 3 -->
-                <div class="product-card">
-                    <img src="https://picsum.photos/800/800?random=3" alt="Product 3">
-                    <h3>Tablet Pro</h3>
-                    <p class="price">$350</p>
-                    <button class="add-to-cart">Add to cart</button>
-                </div>
-                <!-- المنتج 4 -->
-                <div class="product-card">
-                    <img src="https://picsum.photos/800/800?random=4" alt="Product 4">
-                    <h3>Camera 4K</h3>
-                    <p class="price">$800</p>
-                    <button class="add-to-cart">Add to cart</button>
-                </div>
-                <!-- المنتج 5 -->
-                <div class="product-card">
-                    <img src="https://picsum.photos/800/800?random=5" alt="Product 5">
-                    <h3>Monitor 27"</h3>
-                    <p class="price">$200</p>
-                    <button class="add-to-cart">Add to cart</button>
-                </div>
-                <!-- المنتج 6 -->
-                <div class="product-card">
-                    <img src="https://picsum.photos/800/800?random=6" alt="Product 6">
-                    <h3>Accessories Pack</h3>
-                    <p class="price">$45</p>
-                    <button class="add-to-cart">Add to cart</button>
-                </div>
+                {% empty %}
+                <p style="color: white; text-align: center; grid-column: 1 / -1; padding: 40px;">
+                    {% if search_query %}
+                    No products found matching your search for "{{ search_query }}".
+                    {% else %}
+                    No products found in this category.
+                    {% endif %}
+                </p>
+                {% endfor %}
             </div>
         </section>
     </div>

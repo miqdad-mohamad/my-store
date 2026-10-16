@@ -7,29 +7,33 @@
     <div class="auth-container">
         <h2>Login to Your Account</h2>
 
-        <!-- action="#" يعني مؤقتاً، لما نبلش Django رح نحط رابط الـ View -->
-        <form action="#" method="POST" class="auth-form">
+        <form action="" method="POST" class="auth-form">
+            {% csrf_token %}
 
             <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <label for="{{ form.username.id_for_label }}">Username</label>
+                {{ form.username }}
             </div>
 
             <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                <label for="{{ form.password.id_for_label }}">Password</label>
+                {{ form.password }}
             </div>
-
-            <div class="form-options">
-                <label>
-                    <input type="checkbox" name="remember"> Remember me
-                </label>
-                <a href="#">Forgot Password?</a>
+            {% if form.errors %}
+            <div style="color: red; background-color: #ffe6e6; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
+                {% for error in form.non_field_errors %}
+                <p>{{ error }}</p>
+                {% endfor %}
+                {% for field in form %}
+                {% for error in field.errors %}
+                <p>{{ error }}</p>
+                {% endfor %}
+                {% endfor %}
             </div>
+            {% endif %}
 
             <button type="submit" class="auth-btn">Login</button>
         </form>
-
         <p class="auth-switch">
             Don't have an account? <a href="{% url 'register' %}">Register here</a>
         </p>

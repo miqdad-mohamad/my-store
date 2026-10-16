@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="cart-page">
-        <h1 class="page-title">Your Shopping Cart</h1>
+    <h1 class="page-title">Your Shopping Cart</h1>
     <div class="cart-container">
         <!-- جدول المنتجات -->
         <table class="cart-table">
@@ -18,32 +18,31 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- المنتج 1 -->
+                {% for item in cart_items %}
                 <tr>
                     <td class="product-info">
-                        <img src="https://picsum.photos/100/100?random=1" alt="Product 1">
-                        <span>Mobile Phone X</span>
+                        {% if item.product.image %}
+                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                        {% else %}
+                        <img src="https://picsum.photos/100/100?random={{ item.product.id }}"
+                            alt="{{ item.product.name }}">
+                        {% endif %}
+                        <span>{{ item.product.name }}</span>
                     </td>
-                    <td>$500</td>
+                    <td>${{ item.product.price }}</td>
                     <td>
-                        <input type="number" value="1" min="1" class="qty-input">
+                        <input type="number" value="{{ item.quantity }}" min="1" class="qty-input" readonly>
                     </td>
-                    <td>$500</td>
-                    <td><button class="remove-btn">Remove</button></td>
+                    <td>${{ item.subtotal }}</td>
+                    <td>
+                        <a href="{% url 'remove_from_cart' item.product.id %}" class="remove-btn">Remove</a>
+                    </td>
                 </tr>
-                <!-- المنتج 2 -->
+                {% empty %}
                 <tr>
-                    <td class="product-info">
-                        <img src="https://picsum.photos/100/100?random=2" alt="Product 2">
-                        <span>Wireless Battery</span>
-                    </td>
-                    <td>$25</td>
-                    <td>
-                        <input type="number" value="2" min="1" class="qty-input">
-                    </td>
-                    <td>$50</td>
-                    <td><button class="remove-btn">Remove</button></td>
+                    <td colspan="5" style="text-align: center; padding: 30px;">Your cart is empty</td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
 
@@ -52,7 +51,7 @@
             <h3>Order Summary</h3>
             <div class="summary-row">
                 <span>Subtotal:</span>
-                <span>$550</span>
+                <span>${{ total }}</span>
             </div>
             <div class="summary-row">
                 <span>Shipping:</span>
@@ -60,7 +59,7 @@
             </div>
             <div class="summary-row total">
                 <span>Total:</span>
-                <span>$560</span>
+                <span>${{ total|add:10 }}</span>
             </div>
             <a href="{% url 'checkout' %}" class="checkout-btn">Proceed to Checkout</a>
         </div>

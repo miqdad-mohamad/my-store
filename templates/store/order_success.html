@@ -1,0 +1,16 @@
+{% extends 'store/base.html' %}
+
+{% block title %}Order Successful{% endblock %}
+
+{% block content %}
+<div class="order-success-page">
+    <div class="order-success-box">
+        <div class="success-icon">✅</div>
+        <h1>Thank You!</h1>
+        <p>Your order has been placed successfully.</p>
+        <p class="order-number">Order Number: <strong>#{{ order.id }}</strong></p>
+        <p>Total: <strong>${{ order.total }}</strong></p>
+        <a href="{% url 'index' %}" class="continue-btn">Continue Shopping</a>
+    </div>
+</div>
+{% endblock %}

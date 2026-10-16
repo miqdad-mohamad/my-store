@@ -7,60 +7,27 @@
     <h1 class="page-title">My Orders</h1>
 
     <div class="orders-container">
-        
-        <!-- الطلب 1 -->
+        {% for order in user_orders %}
         <div class="order-card">
             <div class="order-header">
                 <div>
-                    <h3>Order #1001</h3>
-                    <p class="order-date">Date: 2026-10-10</p>
-                </div>
-                <span class="status-badge delivered">Delivered</span>
-            </div>
-            <div class="order-body">
-                <p>Items: Mobile Phone X (x1), Wireless Battery (x2)</p>
-                <p class="order-total">Total: $550</p>
-            </div>
-            <div class="order-footer">
-                <a href="#" class="view-details-btn">View Details</a>
-            </div>
-        </div>
-
-        <!-- الطلب 2 -->
-        <div class="order-card">
-            <div class="order-header">
-                <div>
-                    <h3>Order #1002</h3>
-                    <p class="order-date">Date: 2026-10-12</p>
+                    <h3>Order #{{ order.id }}</h3>
+                    <p class="order-date">Date: {{ order.created_at|date:"Y-m-d" }}</p>
                 </div>
                 <span class="status-badge pending">Pending</span>
             </div>
             <div class="order-body">
-                <p>Items: Tablet Pro (x1), Accessories Pack (x1)</p>
-                <p class="order-total">Total: $395</p>
-            </div>
-            <div class="order-footer">
-                <a href="#" class="view-details-btn">View Details</a>
-            </div>
-        </div>
-
-        <!-- الطلب 3 -->
-        <div class="order-card">
-            <div class="order-header">
-                <div>
-                    <h3>Order #1003</h3>
-                    <p class="order-date">Date: 2026-10-13</p>
-                </div>
-                <span class="status-badge shipped">Shipped</span>
-            </div>
-            <div class="order-body">
-                <p>Items: Camera 4K (x1)</p>
-                <p class="order-total">Total: $800</p>
-            </div>
-            <div class="order-footer">
-                <a href="#" class="view-details-btn">View Details</a>
+                <p>Items:
+                    {% for item in order.items.all %}
+                    {{ item.product.name }} (x{{ item.quantity }}){% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </p>
+                <p class="order-total">Total: ${{ order.total }}</p>
             </div>
         </div>
+        {% empty %}
+        <p style="color: white; text-align: center; padding: 40px;">you have no orders yet</p>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}
