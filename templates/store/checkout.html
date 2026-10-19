@@ -7,7 +7,6 @@
     <h1 class="page-title">Checkout</h1>
 
     <div class="checkout-container">
-        <!-- نموذج الشحن والدفع -->
         <form class="checkout-form" action="" method="POST">
             {% csrf_token %}
             <h2>Customer Information</h2>
@@ -64,7 +63,6 @@
             <button type="submit" class="place-order-btn">Place Order</button>
         </form>
 
-        <!-- ملخص الطلب -->
         <div class="order-summary">
             <h2>Your Order</h2>
             {% for item in cart_items %}

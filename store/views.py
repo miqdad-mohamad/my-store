@@ -3,7 +3,6 @@ from .models import Category, Product, Order, OrderItem
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
-# Create your views here.
 
 
 def index(request):
@@ -19,12 +18,10 @@ def products(request):
     products = Product.objects.filter(available=True)
     categories = Category.objects.all()
 
-    # الفلترة حسب التصنيف
     category_slug = request.GET.get('category')
     if category_slug:
         products = products.filter(category__slug=category_slug)
 
-    # البحث
     search_query = request.GET.get('q')
     if search_query:
         products = products.filter(name__icontains=search_query)
