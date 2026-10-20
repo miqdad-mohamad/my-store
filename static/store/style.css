@@ -1133,3 +1133,117 @@ section h2 {
         padding: 20px;
     }
 }
+
+/*Messages Framework (Notifications)*/
+.messages-container {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.alert {
+    padding: 15px 20px;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 300px;
+    animation: slideIn 0.3s ease-out;
+}
+
+.alert-success {
+    background-color: #27ae60;
+}
+
+.alert-info {
+    background-color: #3498db;
+}
+
+.alert-warning {
+    background-color: #f39c12;
+}
+
+.alert-error {
+    background-color: #e74c3c;
+}
+
+.close-btn {
+    cursor: pointer;
+    font-size: 1.5rem;
+    margin-left: 15px;
+    line-height: 1;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/*  Custom 404 Error Page  */
+.error-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    background-color: #f9f9f9;
+    padding: 20px;
+}
+
+.error-container {
+    text-align: center;
+    background: white;
+    padding: 50px 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    max-width: 500px;
+}
+
+.error-code {
+    font-size: 6rem;
+    color: #e74c3c;
+    margin: 0;
+    line-height: 1;
+}
+
+.error-title {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.error-text {
+    color: #7f8c8d;
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.error-btn {
+    display: inline-block;
+    background-color: #3498db;
+    color: white;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.error-btn:hover {
+    background-color: #2980b9;
+}

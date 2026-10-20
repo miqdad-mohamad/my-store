@@ -3,6 +3,7 @@ from .models import Category, Product, Order, OrderItem
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 def index(request):
@@ -62,7 +63,9 @@ def add_to_cart(request, product_id):
     else:
         cart[product_id_str] = 1
     request.session['cart'] = cart
-    return redirect('cart')
+    product = get_object_or_404(Product, id=product_id)
+    messages.success(request, f"{product.name} has been added to your cart.")
+    return redirect(request.META.get('HTTP_REFERER', 'index'))
 
 
 def remove_from_cart(request, product_id):
@@ -141,6 +144,7 @@ def login_view(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
+                messages.success(request, f"Welcome back, {username}!")
                 return redirect('index')
     else:
         form = AuthenticationForm()
@@ -161,4 +165,5 @@ def register(request):
 
 def logout_view(request):
     logout(request)
+    messages.info(request, "You have been logged out successfully.")
     return redirect('index')

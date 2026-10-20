@@ -5,11 +5,12 @@ from django.conf.urls.static import static
 import os
 
 
-admin_url = os.environ.get('ADMIN_URL' , 'admin')
+admin_url = os.environ.get('ADMIN_URL', 'admin')
 
 urlpatterns = [
     path(admin_url, admin.site.urls),
     path('', include('store.urls')),
+    path('api/', include('store.api_urls')),
 ]
 
 # Serve user-uploaded media files only during local development

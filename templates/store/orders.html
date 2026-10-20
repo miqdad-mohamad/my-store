@@ -14,7 +14,7 @@
                     <h3>Order #{{ order.id }}</h3>
                     <p class="order-date">Date: {{ order.created_at|date:"Y-m-d" }}</p>
                 </div>
-                <span class="status-badge pending">Pending</span>
+                <span class="status-badge {{ order.status|lower }}">{{ order.status }}</span>
             </div>
             <div class="order-body">
                 <p>Items:

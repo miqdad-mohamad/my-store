@@ -42,6 +42,13 @@ class Order(models.Model):
         max_length=50, default='Cash on Delivery')
     total = models.DecimalField(max_digits=10, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
+    STATUS_CHOICES = (
+        ('Pending', 'Pending'),
+        ('Shipped', 'Shipped'),
+        ('Delivered', 'Delivered'),
+    )
+    status = models.CharField(
+        max_length=20, choices=STATUS_CHOICES, default='Pending')
 
     def str(self):
         return f"Order #{self.id} - {self.user.username}"

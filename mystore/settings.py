@@ -27,6 +27,8 @@ INSTALLED_APPS = [
     'store',
     'cloudinary_storage',
     'cloudinary',
+    'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -141,6 +143,18 @@ else:
             "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
         },
     }
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'store.permissions.IsAdminOrStaffOrReadOnly',
+    ],
+}
+
 
 if not DEBUG:
     # Force all traffic to use secure HTTPS connections.
