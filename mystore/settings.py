@@ -63,14 +63,14 @@ WSGI_APPLICATION = 'mystore.wsgi.application'
 
 
 # Database configuration
-# Uses SQLite for local development (if DATABASE_URL is not set)
-# Uses PostgreSQL in production (Render provides DATABASE_URL)
+# Use SQLite if DATABASE_URL is not set, otherwise use PostgreSQL
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.environ.get(
-            'DATABASE_URL', f"sqlite:///{BASE_DIR / 'db.sqlite3'}"),
+        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
         conn_max_age=600,
-        ssl_require=bool(os.environ.get('DATABASE_URL'))
+        # Disable SSL if connecting to a local Docker database
+        ssl_require=os.environ.get(
+            'DATABASE_URL') and 'db' not in os.environ.get('DATABASE_URL', '')
     )
 }
 

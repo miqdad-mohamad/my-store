@@ -1,0 +1,44 @@
+services:
+  # Database Service (PostgreSQL)
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: my_store_db
+    volumes:
+      # Persist database data even if the container is stopped
+      - postgres_data:/var/lib/postgresql/data/
+    # Healthcheck ensures the database is fully ready to accept connections
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d my_store_db" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # Django Web Application Service
+  web:
+    build: .
+    # Run migrations first, then start the Gunicorn server
+    command: >
+      sh -c "python manage.py migrate &&
+             gunicorn --bind 0.0.0.0:8000 mystore.wsgi:application"
+    volumes:
+      # Mount the current directory to /app for live code changes (development)
+      - .:/app
+    ports:
+      - "8000:8000"
+    # Wait for the database to pass the healthcheck before starting
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      # Override DATABASE_URL to connect to the 'db' service inside the Docker network
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/my_store_db
+
+volumes:
+  # Define the named volume for persistent database storage
+  postgres_data:

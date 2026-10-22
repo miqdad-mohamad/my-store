@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Category(models.Model):
@@ -66,3 +67,17 @@ class OrderItem(models.Model):
 
     def subtotal(self):
         return self.price * self.quantity
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, related_name='profile')
+    full_name = models.CharField(max_length=200)
+    phone = models.CharField(max_length=20)
+    city = models.CharField(max_length=100)
+    area = models.CharField(max_length=100)
+    street = models.CharField(max_length=200)
+    building = models.CharField(max_length=200)
+
+    def __str__(self):
+        return f"{self.user.username}'s Profile"

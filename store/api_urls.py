@@ -2,6 +2,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken.views import obtain_auth_token
 from .api_views import ProductViewSet, CategoryViewSet, OrderViewSet
+from .api_views import UserProfileAPIView
 
 router = DefaultRouter()
 router.register(r'products', ProductViewSet, basename='products')
@@ -12,4 +13,5 @@ router.register(r'orders', OrderViewSet, basename='orders')
 urlpatterns = [
     path('', include(router.urls)),
     path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
+    path('profile/', UserProfileAPIView.as_view(), name='api_profile')
 ]

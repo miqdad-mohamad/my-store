@@ -9,21 +9,22 @@
     <div class="checkout-container">
         <form class="checkout-form" action="" method="POST">
             {% csrf_token %}
+            
             <h2>Customer Information</h2>
             <div class="form-row">
                 <div class="form-group">
                     <label for="fullname">Full Name *</label>
-                    <input type="text" id="fullname" name="fullname" placeholder="Full name" required>
+                    <input type="text" id="fullname" name="fullname" value="{{ profile.full_name|default:'' }}" placeholder="Full name" required>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group">
                     <label for="phone">Mobile Phone *</label>
-                    <input type="tel" id="phone" name="phone" placeholder="09xxxxxxxx" required>
+                    <input type="tel" id="phone" name="phone" value="{{ profile.phone|default:'' }}" placeholder="09xxxxxxxx" required>
                 </div>
                 <div class="form-group">
                     <label for="secondary_phone">Secondary Phone</label>
-                    <input type="tel" id="secondary_phone" name="secondary_phone" placeholder="Secondary phone ">
+                    <input type="tel" id="secondary_phone" name="secondary_phone" placeholder="Optional">
                 </div>
             </div>
 
@@ -31,30 +32,29 @@
             <div class="form-row">
                 <div class="form-group">
                     <label for="city">City *</label>
-                    <input type="text" id="city" name="city" placeholder="City" required>
+                    <input type="text" id="city" name="city" value="{{ profile.city|default:'' }}" placeholder="City" required>
                 </div>
                 <div class="form-group">
                     <label for="area">Area / District *</label>
-                    <input type="text" id="area" name="area" placeholder="Area" required>
+                    <input type="text" id="area" name="area" value="{{ profile.area|default:'' }}" placeholder="Area" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="street">Street Name *</label>
-                <input type="text" id="street" name="street" placeholder="Street name " required>
+                <input type="text" id="street" name="street" value="{{ profile.street|default:'' }}" placeholder="Street name" required>
             </div>
             <div class="form-group">
                 <label for="building">Building / Floor / Apartment *</label>
-                <input type="text" id="building" name="building" required>
+                <input type="text" id="building" name="building" value="{{ profile.building|default:'' }}" placeholder="Building details" required>
             </div>
             <div class="form-group">
                 <label for="notes">Delivery Notes</label>
-                <input type="text" id="notes" name="notes">
+                <input type="text" id="notes" name="notes" placeholder="Additional notes">
             </div>
 
             <h2>Payment Method</h2>
             <div class="form-group">
-                <label><input type="radio" name="payment_method" value="Cash on Delivery" checked> Cash on
-                    Delivery</label>
+                <label><input type="radio" name="payment_method" value="Cash on Delivery" checked> Cash on Delivery</label>
             </div>
             <div class="form-group">
                 <label><input type="radio" name="payment_method" value="Bank Transfer"> Bank Transfer</label>

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Category, Product, Order, OrderItem
+from .models import Category, Product, Order, OrderItem, UserProfile
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -119,7 +119,13 @@ def checkout(request):
         request.session['cart'] = {}
         return redirect('order_success', order_id=order.id)
 
-    return render(request, 'store/checkout.html', {'cart_items': cart_items, 'total': total})
+    user_profile, created = UserProfile.objects.get_or_create(
+        user=request.user)
+    return render(request, 'store/checkout.html', {
+        'cart_items': cart_items,
+        'total': total,
+        'profile': user_profile
+    })
 
 
 @login_required
@@ -144,6 +150,7 @@ def login_view(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
+                UserProfile.objects.get_or_create(user=user)
                 messages.success(request, f"Welcome back, {username}!")
                 return redirect('index')
     else:
@@ -167,3 +174,22 @@ def logout_view(request):
     logout(request)
     messages.info(request, "You have been logged out successfully.")
     return redirect('index')
+
+
+@login_required
+def profile(request):
+    user_profile, created = UserProfile.objects.get_or_create(
+        user=request.user)
+
+    if request.method == 'POST':
+        user_profile.full_name = request.POST.get('full_name')
+        user_profile.phone = request.POST.get('phone')
+        user_profile.city = request.POST.get('city')
+        user_profile.area = request.POST.get('area')
+        user_profile.street = request.POST.get('street')
+        user_profile.building = request.POST.get('building')
+        user_profile.save()
+        messages.success(request, "Profile updated successfully!")
+        return redirect('profile')
+
+    return render(request, 'store/profile.html', {'profile': user_profile})

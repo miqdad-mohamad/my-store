@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .api_views import UserProfileAPIView
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -17,5 +18,8 @@ urlpatterns = [
     path('product/<int:product_id>/', views.product_detail, name='product_detail'),
     path('order-success/<int:order_id>/',
          views.order_success, name='order_success'),
+
+    path('profile/', views.profile, name='profile'),
+
 
 ]

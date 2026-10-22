@@ -25,7 +25,7 @@
             </form>
             <ul class="nav-links">
                 {% if user.is_authenticated %}
-                <li><span style="color: white;">Hi {{ user.username }}</span></li>
+                <li><a href="{% url 'profile' %}" title="My Profile">👤 {{ user.username }}</a></li>
                 <li><a href="{% url 'logout' %}">Logout</a></li>
                 {% else %}
                 <li><a href="{% url 'login' %}" class="login">Login</a></li>
@@ -35,14 +35,14 @@
         </nav>
     </header>
     {% if messages %}
-        <div class="messages-container">
-            {% for message in messages %}
-                <div class="alert alert-{{ message.tags }}">
-                    {{ message }}
-                    <span class="close-btn" onclick="this.parentElement.style.display='none';">&times;</span>
-                </div>
-            {% endfor %}
+    <div class="messages-container">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+            <span class="close-btn" onclick="this.parentElement.style.display='none';">&times;</span>
         </div>
+        {% endfor %}
+    </div>
     {% endif %}
 
 

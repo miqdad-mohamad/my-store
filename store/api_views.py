@@ -1,8 +1,10 @@
 from rest_framework import viewsets, filters
 from .models import Product, Category, Order
-from .serializers import ProductSerializer, CategorySerializer, OrderSerializer
-from .permissions import IsOwnerOrReadOnly 
+from .serializers import ProductSerializer, CategorySerializer, OrderSerializer, UserProfileSerializer
+from .permissions import IsOwnerOrReadOnly
 from rest_framework.permissions import IsAuthenticated
+from rest_framework import generics
+
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all().select_related('category')
@@ -11,17 +13,30 @@ class ProductViewSet(viewsets.ModelViewSet):
     search_fields = ['name', 'description']
     ordering_fields = ['price', 'created_at']
 
+
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+
 
 class OrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
     permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
 
     def get_queryset(self):
-        queryset = Order.objects.all().select_related('user').prefetch_related('items__product')
-        
+        queryset = Order.objects.all().select_related(
+            'user').prefetch_related('items__product')
+
         if self.request.user.is_staff:
             return queryset
         return queryset.filter(user=self.request.user)
+
+
+
+
+class UserProfileAPIView(generics.RetrieveUpdateAPIView):
+    serializer_class = UserProfileSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self):
+        return self.request.user.profile
