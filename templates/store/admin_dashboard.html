@@ -1,0 +1,53 @@
+{% extends 'store/base.html' %}
+
+{% block title %}Store Dashboard{% endblock %}
+
+{% block content %}
+<div class="checkout-page" style="max-width: 1200px; margin: 0 auto; padding: 40px 20px;">
+
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+        <h1 class="page-title" style="text-align: left; padding: 0; margin: 0; color: white;">Store Dashboard</h1>
+
+        <!-- Button to trigger the CSV download -->
+        <a href="{% url 'export_orders_web' %}" class="btn btn-success"
+            style="background-color: #27ae60; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">
+            📥 Download All Orders (CSV)
+        </a>
+    </div>
+
+    <div style="background: white; border-radius: 10px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+        <table class="cart-table" style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Phone</th>
+                    <th>City</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Loop through orders passed from the view -->
+                {% for order in orders %}
+                <tr>
+                    <td>#{{ order.id }}</td>
+                    <td>{{ order.full_name }}</td>
+                    <td>{{ order.phone }}</td>
+                    <td>{{ order.city }}</td>
+                    <td>${{ order.total }}</td>
+                    <td><span class="status-badge {{ order.status|lower }}">{{ order.status }}</span></td>
+                    <td>{{ order.created_at|date:"Y-m-d" }}</td>
+                </tr>
+                {% empty %}
+                <!-- Display this if there are no orders -->
+                <tr>
+                    <td colspan="7" style="text-align: center; padding: 20px;">No orders found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

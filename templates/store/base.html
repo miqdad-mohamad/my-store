@@ -25,6 +25,11 @@
             </form>
             <ul class="nav-links">
                 {% if user.is_authenticated %}
+                <!-- Show Dashboard link only for staff members -->
+                {% if user.is_staff %}
+                <li><a href="{% url 'admin_dashboard' %}" style="color: #f1c40f; font-weight: bold;">📊 Dashboard</a>
+                </li>
+                {% endif %}
                 <li><a href="{% url 'profile' %}" title="My Profile">👤 {{ user.username }}</a></li>
                 <li><a href="{% url 'logout' %}">Logout</a></li>
                 {% else %}

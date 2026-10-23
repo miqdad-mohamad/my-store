@@ -4,6 +4,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+import csv
+from django.http import HttpResponse
+from django.contrib.admin.views.decorators import staff_member_required
 
 
 def index(request):
@@ -193,3 +196,42 @@ def profile(request):
         return redirect('profile')
 
     return render(request, 'store/profile.html', {'profile': user_profile})
+
+
+# View to display the custom dashboard for store admins
+@staff_member_required
+def custom_admin_dashboard(request):
+    # Fetch all orders, ordered by newest first
+    orders = Order.objects.all().order_by('-created_at')
+    return render(request, 'store/admin_dashboard.html', {'orders': orders})
+
+# View to handle exporting all orders to a CSV file via the web
+
+
+@staff_member_required
+def export_orders_web(request):
+    # Configure the HTTP response for CSV download
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="all_orders_export.csv"'
+
+    # Add BOM (Byte Order Mark) to ensure Excel recognizes Arabic characters
+    response.write(u'\ufeff'.encode('utf8'))
+
+    writer = csv.writer(response)
+    # Write the header row
+    writer.writerow(['Order ID', 'Customer', 'Phone',
+                    'City', 'Date', 'Total', 'Status'])
+
+    # Fetch orders and write each order as a row
+    orders = Order.objects.all().order_by('-created_at')
+    for order in orders:
+        writer.writerow([
+            order.id,
+            order.full_name,
+            order.phone,
+            order.city,
+            order.created_at.strftime("%Y-%m-%d %H:%M"),
+            order.total,
+            order.status
+        ])
+    return response

@@ -20,6 +20,8 @@ urlpatterns = [
          views.order_success, name='order_success'),
 
     path('profile/', views.profile, name='profile'),
+    path('dashboard/', views.custom_admin_dashboard, name='admin_dashboard'),
+    path('dashboard/export/', views.export_orders_web, name='export_orders_web'),
 
 
 ]
